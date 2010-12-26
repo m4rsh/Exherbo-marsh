@@ -36,11 +36,11 @@ DEPENDENCIES="
         dev-libs/quvi [>= 0.2.7]
         net-misc/wget
         net-misc/curl
-        
-        gcap? ( media-video/gcap )
-        grake? ( media-video/grake )
-        umph? ( media-video/umph )       
 "
+#        gcap? ( media-video/gcap )
+#        grake? ( media-video/grake )
+#        umph? ( media-video/umph )       
+#"
 #WORK="${WORKBASE}"
 
 
