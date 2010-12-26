@@ -42,7 +42,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
-        dev-libs/quvi [>= 0.2.7]
+        dev-libs/quvi [>=0.2.7]
         net-misc/wget
         net-misc/curl
 "
