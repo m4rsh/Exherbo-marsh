@@ -4,6 +4,7 @@
 require perl-module
 
 MY_PV="${PV}_4"
+F_PV="${${PV}:0:3}"
 
 SUMMARY="The command line video download tool"
 DESCRIPTION="Video formats commonly used on media portals like Youtube can be downloaded and read by
@@ -11,7 +12,7 @@ local media players.
 "
 
 HOMEPAGE="http://clive.sourceforge.net/"
-DOWNLOADS="mirror://sourceforge/project/${PN}/${PV}/${PN}-${MY_PV}.tar.gz"
+DOWNLOADS="mirror://sourceforge/project/${PN}/${F_PV}/${PN}-${MY_PV}.tar.gz"
 
 BUGS_TO="RamsesV@gmx.net"
 
