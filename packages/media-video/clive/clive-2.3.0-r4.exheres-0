@@ -18,15 +18,18 @@ BUGS_TO="RamsesV@gmx.net"
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="gcap [[ description = [ command line tool for retrieving Youtube closed captions ] ]]
-           grake [[ description = [ command line tool for scanning webpages for Youtube links ] ]]
-           umph [[ description = [ command line tool for parsing video links from Youtube feeds,
-           such as playlists, favorites and uploads ] ]]
-           linguas:
-               de
-           platform:
-               amd64
+MYOPTIONS="
 "
+
+#MYOPTIONS="gcap [[ description = [ command line tool for retrieving Youtube closed captions ] ]]
+#           grake [[ description = [ command line tool for scanning webpages for Youtube links ] ]]
+#           umph [[ description = [ command line tool for parsing video links from Youtube feeds,
+#           such as playlists, favorites and uploads ] ]]
+#           linguas:
+#               de
+#           platform:
+#               amd64
+#"
 
 DEPENDENCIES="
     build+run:
@@ -40,7 +43,14 @@ DEPENDENCIES="
 "
 #WORK="${WORKBASE}"
 
-#src_install() {
+
+# Configure ~/.cliverc, see "man clive" and "FILES" section for an example
+# - Set at least --quvi and --get-with, e.g.:
+# cat > ~/.cliverc
+# --quvi "/usr/bin/quvi %u"
+# --get-with "/usr/bin/curl -L -C - -o %f %u"
+
+#clive_src_install() {
 #    local dest="/usr/share/clive/"
 #    dodir "${dest}"
 #    insinto "${dest}"
