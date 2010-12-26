@@ -1,0 +1,50 @@
+# Copyright 2010 Markus Schmits <RamsesV@gmx.net>
+# Distributed under the terms of the GNU General Public License v3
+
+require perl-module
+
+MY_PV="${PV}_4"
+
+SUMMARY="The command line video download tool"
+DESCRIPTION="Video formats commonly used on media portals like Youtube can be downloaded and read by
+local media players.
+"
+
+HOMEPAGE="http://clive.sourceforge.net/"
+DOWNLOADS="mirror://sourceforge/project/${PN}/${PV}/${PN}-${MY_PV}.tar.gz"
+
+BUGS_TO="RamsesV@gmx.net"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="gcap [[ description = [ command line tool for retrieving Youtube closed captions ] ]]
+           grake [[ description = [ command line tool for scanning webpages for Youtube links ] ]]
+           umph [[ description = [ command line tool for parsing video links from Youtube feeds,
+           such as playlists, favorites and uploads ] ]]
+           linguas:
+               de
+           platform:
+               amd64
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/quvi [>= 0.2.7]
+        net-misc/wget
+        net-misc/curl
+        
+        gcap? ( media-video/gcap )
+        grake? ( media-video/grake )
+        umph? ( media-video/umph )       
+"
+#WORK="${WORKBASE}"
+
+#src_install() {
+#    local dest="/usr/share/clive/"
+#    dodir "${dest}"
+#    insinto "${dest}"
+    # doins returns error message: empty directories; thus deleting empty dirs
+    #find -type d -empty -delete
+#    doins -r *
+#}

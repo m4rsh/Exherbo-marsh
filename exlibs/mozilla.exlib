@@ -1,0 +1,117 @@
+# Copyright 2008 Bernd Steinhauser <berniyh@exherbo.org>
+# Copyright 2010 Markus Schmits <RamsesV@gmx.net>
+# Distributed under the terms of the GNU General Public License v2
+
+require flag-o-matic multilib
+
+export_exlib_phases src_unpack src_prepare src_configure
+
+# Mozilla checkout project
+myexparam co_project
+
+# Provide "debug" option and common implementation
+myexparam -b provide_debug=true
+
+# nspr and nss versions. Values should be standard exheres version specs
+# enclosed in double quotes (e.g. "[>=4.8]", "[=3.12.3]"). If unspecified, the
+# latest available versions will be used.
+myexparam supported_nspr=
+myexparam supported_nss=
+myexparam xulrunner_dir=xulrunner
+
+exparam -v MOZ_CO_PROJECT co_project
+exparam -v supported_nspr supported_nspr
+exparam -v supported_nss supported_nss
+exparam -v xulrunner_dir xulrunner_dir
+
+exparam -b provide_debug && MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/nspr${supported_nspr}
+        dev-libs/nss${supported_nss}
+"
+
+WORK="${WORKBASE}"/build/${MOZ_CO_PROJECT}
+
+export BUILD_OFFICIAL=1
+export MOZILLA_OFFICIAL=1
+
+mozilla_src_unpack() {
+    default
+    edo mkdir -p "${WORK}"
+}
+
+mozilla_src_prepare() {
+    default
+
+    edo sed \
+        -e "/^installdir/ c installdir = /usr/$(get_libdir)/${PN}" \
+        -e "/^includedir/ c includedir = /usr/include/${PN}" \
+        -e "/^idldir/ c idldir = /usr/share/idl/${PN}" \
+        -e "/^sdkdir/ c sdkdir = /usr/$(get_libdir)/${PN}-devel" \
+        -i "${ECONF_SOURCE}"/config/autoconf.mk.in
+    edo sed \
+        -e "s!/stable!!" \
+        -i "${ECONF_SOURCE}"/${xulrunner_dir}/installer/mozilla-plugin.pc.in
+}
+
+mozilla_src_configure() {
+    illegal_in_global_scope
+
+    export PKG_SKIP_STRIP=1
+    export MOZ_CO_PROJECT
+    export MOZ_OBJDIR=@TOPSRCDIR@/../build
+
+    # Workaround for gcc hidden symbol errors affecting Mozilla products
+    # ("ld: final link failed: Nonrepresentable section on output"). See
+    # Mozilla bug #293438 and also:
+    #     http://benjamin.smedbergs.us/blog/2005-10-27/gcc-40-workaround/
+    export ac_cv_visibility_pragma=no
+
+    local x param_optimize
+
+    # Override the default optimization levels of Mozilla projects with the
+    # value specified by -O from the user's CFLAGS/CXXFLAGS (if -O isn't given
+    # gcc defaults to '-O0'). Optimization must be disabled when the 'debug'
+    # option is set.
+    if exparam -b provide_debug && option debug ; then
+        param_optimize="--disable-optimize"
+    else
+        for x in ${CFLAGS}; do
+            case ${x} in
+                -O|-O1)      param_optimize="--enable-optimize=-O1"  ;;
+                -O2|-O3|-Os) param_optimize="--enable-optimize=${x}" ;;
+            esac
+        done
+        [[ -z ${param_optimize} ]] && param_optimize="--enable-optimize=-O0"
+    fi
+
+    # Now filter -O from CFLAGS/CXXFLAGS to avoid a duplicate in the resulting
+    # compile string.
+    filter-flags '-O*'
+
+    local param_debug
+    exparam -b provide_debug && param_debug="
+        $(option_enable debug)
+        $(option_enable debug tests)
+    "
+
+    econf \
+        "${MOZILLA_SRC_CONFIGURE_PARAMS[@]}" \
+        $(for s in "${MOZILLA_SRC_CONFIGURE_OPTION_ENABLES[@]}" ; do
+            option_enable ${s}
+        done) \
+        $(for s in "${MOZILLA_SRC_CONFIGURE_OPTION_WITHS[@]}" ; do
+            option_with ${s}
+        done) \
+        --disable-strip \
+        --enable-application=${MOZ_CO_PROJECT} \
+        ${param_debug} \
+        ${param_optimize} \
+        --with-default-mozilla-five-home=/usr/$(get_libdir)/${PN} \
+        --with-distribution-id=org.exherbo \
+        --with-system-nspr \
+        --with-system-nss
+}
+
