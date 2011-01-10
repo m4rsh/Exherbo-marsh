@@ -19,6 +19,11 @@ LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
+DEPENDENCIES="
+        build+run:
+        dev-perl/Getopt-ArgvFile[>=1.11]
+"
+
 #WORK="${WORKBASE}"
 
 #gcap_src_install() {
