@@ -1,4 +1,4 @@
-# Copyright 2010 Markus Schmits <RamsesV@gmx.net>
+# Copyright 2010-2012 Markus Schmits <RamsesV@gmx.net>
 # Distributed under the terms of the GNU General Public License v3
 
 require java
@@ -6,7 +6,7 @@ require java
 #PN=${Mediathek}
 
 SUMMARY="Video stream and podcast viewer tool written in Java"
-DESCRIPTION="Especially for german TV based streams and podcasts ...
+DESCRIPTION="MediathekView is a search engine for TV streams and podcasts for a variety of TV channels (ARD, ZDF, Arte, 3Sat, MDR, NDR, ORF, SF). Offers downloading of media streams with a program of own choice and is able to manage programmes as abonnements and podcasts.  
 "
 
 HOMEPAGE="http://zdfmediathk.sourceforge.net"
@@ -16,7 +16,7 @@ BUGS_TO="RamsesV@gmx.net"
 
 LICENCES="GPL-3"
 SLOT="0"
-PLATFORMS="~amd64"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="flv [[ description = [ Support for streaming media ] ]]
 "
 
