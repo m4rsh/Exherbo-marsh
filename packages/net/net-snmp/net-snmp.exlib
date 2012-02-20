@@ -49,7 +49,7 @@ DEPENDENCIES="
 	)
     selinux? ( sec-policy/selinux-snmpd )"
 
-src_prepare() {
+net-snmp_src_prepare() {
     if option python ; then
         PYTHON_MODNAME="netsnmp"
         PYTHON_DIR="/usr/lib/python2.7/site-packages"
@@ -70,7 +70,7 @@ src_prepare() {
 
 }
 
-src_configure() {
+net-snmp_src_configure() {
 
     local mibs="host ucd-snmp/dlmod"
     option diskio && mibs="${mibs} ucd-snmp/diskio"
@@ -113,16 +113,16 @@ src_configure() {
         ${myconf}
 }
 
-src_compile() {
-      emake -j8 || die "emake failed"
+net-snmp_src_compile() {
+      emake -j1 || die "emake failed"
       if option doc ; then
         einfo "Building HTML Documentation"
         make docsdox || die "failed to build docs"
       fi
 }
 
-src_install() {
-      make -j8 DESTDIR="${IMAGE}" install || die "make install failed"
+net-snmp_src_install() {
+      make -j1 DESTDIR="${IMAGE}" install || die "make install failed"
       if option perl ; then
         fixlocalpod
         option X || rm -f "${IMAGE}"/usr/bin/tkmib
@@ -163,11 +163,11 @@ src_install() {
       newins "${WORK}"/EXAMPLE.conf snmpd.conf.example || die
 }
 
-pkg_postrm() {
+net-snmp_pkg_postrm() {
     option python && python_mod_cleanup
 }
 
-pkg_postinst() {
+net-snmp_pkg_postinst() {
     elog "An example configuration file has been installed in"
     elog "/etc/snmp/snmpd.conf.example."
 }
