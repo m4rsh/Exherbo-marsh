@@ -1,0 +1,6 @@
+# Copyright 2011 Markus Schmits <RamsesV@gmx.net>
+# Distributed under the terms of the GNU General Public License v2
+
+require net-snmp
+
+PLATFORMS="~amd64 ~x86"
