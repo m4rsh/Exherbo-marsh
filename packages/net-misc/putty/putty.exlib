@@ -8,7 +8,7 @@ SUMMARY="UNIX port of the famous Telnet and SSH client"
 HOMEPAGE="http://www.chiark.greenend.org.uk/~sgtatham/${PN}/"
 DOWNLOADS="http://the.earth.li/~sgtatham/${PN}/latest/${PNV}.tar.gz"
 #BUGS_TO="RamsesV@gmx.net"
-LICENSES="MIT"
+LICENCES="MIT"
 SLOT="0"
 
 #MYOPTIONS="doc ipv6 kerberos"
