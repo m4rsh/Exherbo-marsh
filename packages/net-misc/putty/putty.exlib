@@ -7,18 +7,19 @@
 SUMMARY="UNIX port of the famous Telnet and SSH client"
 HOMEPAGE="http://www.chiark.greenend.org.uk/~sgtatham/${PN}/"
 DOWNLOADS="http://the.earth.li/~sgtatham/${PN}/latest/${PNV}.tar.gz"
-#BUGS_TO="RamsesV@gmx.net"
+# BUGS_TO="RamsesV@gmx.net"
 LICENCES="MIT"
 SLOT="0"
 
-#MYOPTIONS="doc ipv6 kerberos"
+# MYOPTIONS="doc ipv6 kerberos"
 
+      # kerberos? ( virtual/krb5 )
+      # x11-libs/gdk-pixbuf
+      
 DEPENDENCIES="
     build+run:
         !net-misc/pssh
         dev-libs/glib:2[>=2.10]
-        #kerberos? ( virtual/krb5 )
-        #x11-libs/gdk-pixbuf
         x11-libs/gtk+:2[>=2.10]
         x11-libs/libX11
         x11-libs/pango
