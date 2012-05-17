@@ -10,7 +10,7 @@ DESCRIPTION="MediathekView is a search engine for TV streams and podcasts for a 
 "
 
 HOMEPAGE="http://zdfmediathk.sourceforge.net"
-DOWNLOADS="mirror://sourceforge/project/zdfmediathk/${PN}/${PN}%20${PV}/${PN}_${PV}.zip"
+DOWNLOADS="mirror://sourceforge/projects/zdfmediathk/${PN}/${PN}%20${PV}/${PN}_${PV}.zip"
 
 BUGS_TO="RamsesV@gmx.net"
 
