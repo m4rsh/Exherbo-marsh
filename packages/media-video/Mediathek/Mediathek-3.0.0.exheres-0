@@ -1,0 +1,37 @@
+# Copyright 2010-2012 Markus Schmits <RamsesV@gmx.net>
+# Distributed under the terms of the GNU General Public License v3
+
+require java
+
+#PN=${Mediathek}
+
+SUMMARY="Video stream and podcast viewer tool written in Java"
+DESCRIPTION="MediathekView is a search engine for TV streams and podcasts for a variety of TV channels (ARD, ZDF, Arte, 3Sat, MDR, NDR, ORF, SF). Offers downloading of media streams with a program of own choice and is able to manage programmes as abonnements and podcasts.  
+"
+
+HOMEPAGE="http://zdfmediathk.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/project/zdfmediathk/${PN}/${PN}%20${PV}/${PN}_${PV}.zip"
+
+BUGS_TO="RamsesV@gmx.net"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="flv [[ description = [ Support for streaming media ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        virtual/jdk[>=1.6]
+        flv? ( media-video/flvstreamer )
+"
+WORK="${WORKBASE}"
+
+src_install() {
+    local dest="/usr/share/mediathek/"
+    dodir "${dest}"
+    insinto "${dest}"
+    # doins returns error message: empty directories; thus deleting empty dirs
+    find -type d -empty -delete
+    doins -r *
+}
