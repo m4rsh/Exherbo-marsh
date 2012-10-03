@@ -24,6 +24,8 @@ MYOPTIONS="bzip2 diskio doc elf
            mfd-rewrites minimal perl python rpm 
            selinux sendmail smux ssl tcpd X zlib"
 
+RESTRICT="test"
+
 COMMON="ssl? ( dev-libs/openssl[>=0.9.6d] )
 	tcpd? ( sys-apps/tcp-wrappers[>=7.6] ) 
 	rpm? (
