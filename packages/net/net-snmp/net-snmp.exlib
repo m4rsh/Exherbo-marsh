@@ -1,4 +1,4 @@
-# Copyright 2011 Markus Schmits <RamsesV@gmx.net>
+# Copyright 2011-2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'net-snmp-5.4.2.1-r3.ebuild' from Gentoo, which is:
 #     Copyright 1999-2009 Gentoo Foundation.
@@ -14,8 +14,8 @@ is a suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using
 HOMEPAGE="http://${PN}.sourceforge.net/"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
 
-BUGS_TO="RamsesV@gmx.net"
-REMOTE_IDS="freshmeat:${PN}"
+BUGS_TO="marsh.exherbo@gmail.com"
+REMOTE_IDS="freecode:${PN}"
 LICENCES="as-is BSD"
 SLOT="0"
 
@@ -58,15 +58,15 @@ net-snmp_src_prepare() {
     fi
 
     # remove CFLAGS from net-snmp-config script (bug #257622):
-    sed -i \
-        -e 's|@CFLAGS@ ||g' \
-        -e 's|@LDFLAGS@ ||g' \
-        net-snmp-config.in || die "sedding CFLAGS failed"
+#    sed -i \
+#        -e 's|@CFLAGS@ ||g' \
+#        -e 's|@LDFLAGS@ ||g' \
+#        net-snmp-config.in || die "sedding CFLAGS failed"
 
     # Respect LDFLAGS
-    sed -i Makefile.top \
-        -e '/^LIB_LD_CMD/{s|$(CFLAGS)|& $(LDFLAGS)|g}' \
-        || die "sed LDFLAGS failed"
+#    sed -i Makefile.top \
+#        -e '/^LIB_LD_CMD/{s|$(CFLAGS)|& $(LDFLAGS)|g}' \
+#        || die "sed LDFLAGS failed"
 
 }
 
@@ -113,55 +113,55 @@ net-snmp_src_configure() {
         ${myconf}
 }
 
-net-snmp_src_compile() {
-      emake -j1 || die "emake failed"
-      if option doc ; then
-        einfo "Building HTML Documentation"
-        make docsdox || die "failed to build docs"
-      fi
-}
+#net-snmp_src_compile() {
+#      emake -j1 || die "emake failed"
+#      if option doc ; then
+#        einfo "Building HTML Documentation"
+#        make docsdox || die "failed to build docs"
+#      fi
+#}
 
-net-snmp_src_install() {
-      make -j1 DESTDIR="${IMAGE}" install || die "make install failed"
-      if option perl ; then
-        fixlocalpod
-        option X || rm -f "${IMAGE}"/usr/bin/tkmib
-      else
-        rm -f "${IMAGE}"/usr/bin/mib2c "${IMAGE}"/usr/bin/snmpcheck "${IMAGE}"/usr/bin/tkmib
-      fi
-
-      dodoc AGENT.txt ChangeLog FAQ INSTALL NEWS PORTING README* TODO || die
-      newdoc EXAMPLE.conf.def EXAMPLE.conf || die
-
-      option doc && { dohtml docs/html/* || die ; }
-
-      keepdir /etc/snmp /var/lib/net-snmp
-
-      newinitd "${FILES}"/snmpd.init snmpd || die
-      newconfd "${FILES}"/snmpd.conf snmpd || die
-
-      newinitd "${FILES}"/snmptrapd.init snmptrapd || die
-      newconfd "${FILES}"/snmptrapd.conf snmptrapd || die
+#net-snmp_src_install() {
+#      make -j1 DESTDIR="${IMAGE}" install || die "make install failed"
+#      if option perl ; then
+#        fixlocalpod
+#        option X || rm -f "${IMAGE}"/usr/bin/tkmib
+#      else
+#        rm -f "${IMAGE}"/usr/bin/mib2c "${IMAGE}"/usr/bin/snmpcheck "${IMAGE}"/usr/bin/tkmib
+#      fi
+#
+#      dodoc AGENT.txt ChangeLog FAQ INSTALL NEWS PORTING README* TODO || die
+#      newdoc EXAMPLE.conf.def EXAMPLE.conf || die
+#
+#      option doc && { dohtml docs/html/* || die ; }
+#
+#      keepdir /etc/snmp /var/lib/net-snmp
+#
+#      newinitd "${FILES}"/snmpd.init snmpd || die
+#      newconfd "${FILES}"/snmpd.conf snmpd || die
+#
+#      newinitd "${FILES}"/snmptrapd.init snmptrapd || die
+#      newconfd "${FILES}"/snmptrapd.conf snmptrapd || die
 
       # Remove everything not required for an agent.
       # Keep only the snmpd, snmptrapd, MIBs, headers and libraries.
-      if option minimal; then
-        elog "OPTION='minimal' is set. Removing excess/non-minimal components."
-        rm -rf
-        "${IMAGE}"/usr/bin/{encode_keychange,snmp{get,getnext,set,usm,walk,bulkwalk,table,trap,bulkget,translate,status,delta,test,df, \ 
-        vacm,netstat,inform,snmpcheck}}
-        rm -rf "${IMAGE}"/usr/share/snmp/snmpconf-data
-        "${IMAGE}"/usr/share/snmp/*.conf
-        rm -rf "${IMAGE}"/usr/bin/{fixproc,traptoemail}
-        "${IMAGE}"/usr/bin/snmpc{heck,onf}
-        find "${IMAGE}" -name '*.pl' -exec rm -f '{}' \;
-        option ipv6 || rm -rf "${IMAGE}"/usr/share/snmp/mibs/IPV6*
-      fi
+#      if option minimal; then
+#        elog "OPTION='minimal' is set. Removing excess/non-minimal components."
+#        rm -rf
+#        "${IMAGE}"/usr/bin/{encode_keychange,snmp{get,getnext,set,usm,walk,bulkwalk,table,trap,bulkget,translate,status,delta,test,df, \ 
+#        vacm,netstat,inform,snmpcheck}}
+#        rm -rf "${IMAGE}"/usr/share/snmp/snmpconf-data
+#        "${IMAGE}"/usr/share/snmp/*.conf
+#        rm -rf "${IMAGE}"/usr/bin/{fixproc,traptoemail}
+#        "${IMAGE}"/usr/bin/snmpc{heck,onf}
+#        find "${IMAGE}" -name '*.pl' -exec rm -f '{}' \;
+#        option ipv6 || rm -rf "${IMAGE}"/usr/share/snmp/mibs/IPV6*
+#      fi
 
       # bug 113788, install example config
-      insinto /etc/snmp
-      newins "${WORK}"/EXAMPLE.conf snmpd.conf.example || die
-}
+#      insinto /etc/snmp
+#      newins "${WORK}"/EXAMPLE.conf snmpd.conf.example || die
+#}
 
 net-snmp_pkg_postrm() {
     option python && python_mod_cleanup
