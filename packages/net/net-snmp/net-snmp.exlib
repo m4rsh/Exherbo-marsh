@@ -4,7 +4,7 @@
 #     Copyright 1999-2009 Gentoo Foundation.
 
 require python
-export_exlib_phases src_prepare src_configure src_install pkg_postrm pkg_postrm
+#export_exlib_phases src_prepare src_configure src_install pkg_postrm pkg_postrm
 
 SUMMARY="Simple Network Management Protocol (SNMP)"
 DESCRIPTION="Simple Network Management Protocol (SNMP) is a widely used protocol for monitoring the health and
