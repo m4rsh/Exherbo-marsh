@@ -39,9 +39,9 @@ src_prepare() {
     fi
 }
 
-src_configure() {
-    local myconf="$(option_with python python-modules)"
-}
+#src_configure() {
+#    local myconf="$(option_with python python-modules)"
+#}
 
 src_install() {
     default
