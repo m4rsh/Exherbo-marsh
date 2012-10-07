@@ -45,7 +45,6 @@ DEPENDENCIES="
 	perl? (
 		X? ( dev-perl/Tk )
         )
-	)
         selinux? ( sec-policy/selinux-snmpd )
 "
 
