@@ -15,7 +15,8 @@ SLOT="0"
 MYOPTIONS="bzip2 diskio doc elf 
            extensible ipv6 kernel_linux lm_sensors 
            mfd-rewrites minimal perl python rpm 
-           selinux sendmail smux ssl systemd tcpd X zlib"
+           selinux sendmail smux ssl systemd tcpd X zlib
+"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-defaults' )
 
@@ -32,17 +33,21 @@ COMMON="ssl? ( dev-libs/openssl[>=0.9.6d] )
         bzip2? ( app-arch/bzip2 ) 
         zlib? ( sys-libs/zlib[>=1.1.4] )
         elf? ( dev-util/elfutils )
-        lm_sensors? (kernel_linux? ( sys-apps/lm_sensors ))
-        python? ( dev-python/setuptools )"
+        lm_sensors? (
+	          kernel_linux? ( sys-apps/lm_sensors )
+        )
+        python? ( dev-python/setuptools )
+"
 
 DEPENDENCIES="
     build+run:
 	${COMMON}
 	perl? (
 		X? ( dev-perl/Tk )
-		!minimal? ( dev-perl/TermReadKey )
+        )
 	)
-        selinux? ( sec-policy/selinux-snmpd )"
+        selinux? ( sec-policy/selinux-snmpd )
+"
 
 src_prepare() {
     if option python ; then
