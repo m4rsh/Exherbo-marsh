@@ -49,7 +49,7 @@ DEPENDENCIES="
 
 src_prepare() {
     # Fixes compile errors with libnl-1_2.0
-    expatch "${FILES}"${PNV}-fix-build-error-too-few-arguments-to-function-nl_geterror.patch
+    expatch "${FILES}"/${PNV}-fix-build-error-too-few-arguments-to-function-nl_geterror.patch
     
     
     if option python ; then
