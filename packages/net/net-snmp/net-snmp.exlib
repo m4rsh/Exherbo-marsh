@@ -2,7 +2,7 @@
 # Copyright 2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require systemd-service python
+require systemd-service
 
 SUMMARY="Net-SNMP is a suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using both IPv4 and IPv6"
 HOMEPAGE="http://www.net-snmp.org"
@@ -58,45 +58,47 @@ src_prepare() {
 }
 
 src_configure() {
-    local mibs="host ucd-snmp/dlmod"
-    option diskio && mibs="${mibs} ucd-snmp/diskio"
-    option extensible && mibs="${mibs} ucd-snmp/extensible"
-    option lm_sensors && mibs="${mibs} ucd-snmp/lmsensorsMib"
-    option sendmail && mibs="${mibs} mibII/mta_sendmail"
-    option smux && mibs="${mibs} smux"
+#    local mibs="host ucd-snmp/dlmod"
+#    option diskio && mibs="${mibs} ucd-snmp/diskio"
+#    option extensible && mibs="${mibs} ucd-snmp/extensible"
+#    option lm_sensors && mibs="${mibs} ucd-snmp/lmsensorsMib"
+#    option sendmail && mibs="${mibs} mibII/mta_sendmail"
+#    option smux && mibs="${mibs} smux"
 
-    local myconf="$(option_enable ipv6) \
-		$(option_enable mfd-rewrites) \
-		$(option_enable perl embedded-perl) \
-		$(option_enable !ssl internal-md5) \
-		$(option_with elf) \
-		$(option_with perl perl-modules) \
+    local myconf="
+    #$(option_enable ipv6) \
+#		$(option_enable mfd-rewrites) \
+#		$(option_enable perl embedded-perl) \
+#		$(option_enable !ssl internal-md5) \
+#		$(option_with elf) \
+#		$(option_with perl perl-modules) \
 		$(option_with python python-modules) \
-		$(option_with ssl openssl) \
-		$(option_with tcpd libwrap)"
-    if option rpm ; then
-        myconf="${myconf} \
-			--with-rpm \
-			--with-bzip2 \
-			--with-zlib"
-    else
-        myconf="${myconf} \
-			$(option_with bzip2) \
-			$(option_with zlib)"
-    fi
+#		$(option_with ssl openssl) \
+#		$(option_with tcpd libwrap)"
+		"
+#    if option rpm ; then
+#        myconf="${myconf} \
+#			--with-rpm \
+#			--with-bzip2 \
+#			--with-zlib"
+#    else
+#        myconf="${myconf} \
+#			$(option_with bzip2) \
+#			$(option_with zlib)"
+#    fi
 
-    econf \
-        --with-install-prefix="${IMAGE}" \
-        --with-sys-location="Unknown" \
-        --with-sys-contact="root@Unknown" \
-        --with-default-snmp-version="3" \
-        --with-mib-modules="${mibs}" \
-        --with-logfile="/var/log/net-snmpd.log" \
-        --with-persistent-directory="/var/lib/net-snmp" \
-        --enable-ucd-snmp-compatibility \
-        --enable-shared \
-        --enable-as-needed \
-        ${myconf}
+#    econf \
+#        --with-install-prefix="${IMAGE}" \
+#        --with-sys-location="Unknown" \
+#        --with-sys-contact="root@Unknown" \
+#        --with-default-snmp-version="3" \
+#        --with-mib-modules="${mibs}" \
+#        --with-logfile="/var/log/net-snmpd.log" \
+#        --with-persistent-directory="/var/lib/net-snmp" \
+#        --enable-ucd-snmp-compatibility \
+#        --enable-shared \
+#        --enable-as-needed \
+#        ${myconf}
 }
 
 src_install() {
