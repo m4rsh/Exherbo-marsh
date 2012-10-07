@@ -22,30 +22,12 @@ DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-defaults' )
 
 RESTRICT="test"
 
-COMMON="ssl? ( dev-libs/openssl[>=0.9.6d] )
-        tcpd? ( sys-apps/tcp-wrappers[>=7.6] ) 
-        rpm? (
-                  app-arch/rpm
-                  dev-libs/popt
-                  app-arch/bzip2
-                  sys-libs/zlib[>=1.1.4]
-        )
-        bzip2? ( app-arch/bzip2 ) 
-        zlib? ( sys-libs/zlib[>=1.1.4] )
-        elf? ( dev-util/elfutils )
-        lm_sensors? (
-	          kernel_linux? ( sys-apps/lm_sensors )
-        )
-        python? ( dev-python/setuptools )
+COMMON="python? ( dev-python/setuptools )
 "
 
 DEPENDENCIES="
     build+run:
 	${COMMON}
-	perl? (
-		X? ( dev-perl/Tk )
-        )
-        selinux? ( sec-policy/selinux-snmpd )
 "
 
 src_prepare() {
@@ -58,47 +40,7 @@ src_prepare() {
 }
 
 src_configure() {
-#    local mibs="host ucd-snmp/dlmod"
-#    option diskio && mibs="${mibs} ucd-snmp/diskio"
-#    option extensible && mibs="${mibs} ucd-snmp/extensible"
-#    option lm_sensors && mibs="${mibs} ucd-snmp/lmsensorsMib"
-#    option sendmail && mibs="${mibs} mibII/mta_sendmail"
-#    option smux && mibs="${mibs} smux"
-
-    local myconf="
-    #$(option_enable ipv6) \
-#		$(option_enable mfd-rewrites) \
-#		$(option_enable perl embedded-perl) \
-#		$(option_enable !ssl internal-md5) \
-#		$(option_with elf) \
-#		$(option_with perl perl-modules) \
-		$(option_with python python-modules) \
-#		$(option_with ssl openssl) \
-#		$(option_with tcpd libwrap)"
-		"
-#    if option rpm ; then
-#        myconf="${myconf} \
-#			--with-rpm \
-#			--with-bzip2 \
-#			--with-zlib"
-#    else
-#        myconf="${myconf} \
-#			$(option_with bzip2) \
-#			$(option_with zlib)"
-#    fi
-
-#    econf \
-#        --with-install-prefix="${IMAGE}" \
-#        --with-sys-location="Unknown" \
-#        --with-sys-contact="root@Unknown" \
-#        --with-default-snmp-version="3" \
-#        --with-mib-modules="${mibs}" \
-#        --with-logfile="/var/log/net-snmpd.log" \
-#        --with-persistent-directory="/var/lib/net-snmp" \
-#        --enable-ucd-snmp-compatibility \
-#        --enable-shared \
-#        --enable-as-needed \
-#        ${myconf}
+    local myconf="$(option_with python python-modules"
 }
 
 src_install() {
