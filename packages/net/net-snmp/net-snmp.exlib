@@ -1,4 +1,3 @@
-# Copyright 2012 Kevin Decherf <kevin@kdecherf.com> 
 # Copyright 2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
@@ -14,7 +13,7 @@ LICENCES="as-is BSD"
 SLOT="0"
 MYOPTIONS="bzip2 diskio doc elf 
            extensible ipv6 kernel_linux lm_sensors 
-           mfd-rewrites minimal perl python rpm 
+           mfd-rewrites perl python rpm 
            selinux sendmail smux ssl systemd tcpd X zlib
 "
 
