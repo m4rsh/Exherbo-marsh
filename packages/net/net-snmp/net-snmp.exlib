@@ -2,7 +2,7 @@
 # Copyright 2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require systemd-service
+require systemd-service python
 
 SUMMARY="Net-SNMP is a suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using both IPv4 and IPv6"
 HOMEPAGE="http://www.net-snmp.org"
@@ -18,7 +18,7 @@ MYOPTIONS="bzip2 diskio doc elf
            selinux sendmail smux ssl systemd tcpd X zlib
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-defaults' )
+DEFAULT_SRC_CONFIGURE_PARAMS=( '$(--with-defaults) $(python python-modules)' )
 
 RESTRICT="test"
 
@@ -39,7 +39,7 @@ src_prepare() {
     fi
 }
 
-#src_configure() {
+#net-snmp_src_configure() {
 #    local myconf="$(option_with python python-modules)"
 #}
 
