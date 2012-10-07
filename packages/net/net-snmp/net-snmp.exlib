@@ -1,3 +1,4 @@
+# Copyright 2012 Kevin Decherf <kevin@kdecherf.com> 
 # Copyright 2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
@@ -48,10 +49,6 @@ DEPENDENCIES="
 "
 
 src_prepare() {
-    # Fixes compile errors with libnl-1_2.0
-    #expatch "${FILES}"/${PNV}-fix-build-error-too-few-arguments-to-function-nl_geterror.patch
-    
-    
     if option python ; then
         PYTHON_MODNAME="netsnmp"
         PYTHON_DIR="/usr/lib/python2.7/site-packages"
@@ -61,7 +58,6 @@ src_prepare() {
 }
 
 src_configure() {
-
     local mibs="host ucd-snmp/dlmod"
     option diskio && mibs="${mibs} ucd-snmp/diskio"
     option extensible && mibs="${mibs} ucd-snmp/extensible"
