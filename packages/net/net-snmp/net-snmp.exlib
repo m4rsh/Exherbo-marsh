@@ -89,6 +89,7 @@ net-snmp_src_configure() {
     fi
 
     econf \
+        --with-defaults
         --with-install-prefix="${IMAGE}" \
         --with-sys-location="Unknown" \
         --with-sys-contact="root@Unknown" \
@@ -102,14 +103,14 @@ net-snmp_src_configure() {
         ${myconf}
 }
 
-#net-snmp_src_install() {
-#    default
-#
-#    keepdir /etc/snmp
-#    einfo "To make your first configuration file, use 'snmpconf -g basic_setup' and copy snmpd.conf
-#           where you want"
-#    install_systemd_files
-#}
+net-snmp_src_install() {
+    default
+
+    keepdir /etc/snmp
+    einfo "To make your first configuration file, use 'snmpconf -g basic_setup' and copy snmpd.conf
+           where you want"
+    install_systemd_files
+}
 
 net-snmp_pkg_postrm() {
     option python && python_mod_cleanup
