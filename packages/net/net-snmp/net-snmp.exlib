@@ -90,7 +90,8 @@ net-snmp_src_configure() {
     fi
 
 
-    #econf \
+    econf \
+	--with-defaults \
 	--with-install-prefix="${IMAGE}" \
         --with-sys-location="Unknown" \
         --with-sys-contact="root@Unknown" \
