@@ -96,7 +96,8 @@ net-snmp_src_configure() {
     fi
 
     econf \
-        --with-install-prefix="${IMAGE}" \
+        --enable-silent-libtool
+	--with-install-prefix="${IMAGE}" \
         --with-sys-location="Unknown" \
         --with-sys-contact="root@Unknown" \
         --with-default-snmp-version="3" \
