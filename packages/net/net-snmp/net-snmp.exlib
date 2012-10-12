@@ -50,14 +50,14 @@ DEPENDENCIES="
         )
     selinux? ( sec-policy/selinux-snmpd )"
 
-#net-snmp_src_prepare() {
-#    if option python ; then
-#        PYTHON_MODNAME="netsnmp"
-#        PYTHON_DIR="/usr/lib/python2.7/site-packages"
-#        sed -i -e "s:\(install --basedir=\$\$dir\):\1 --root='${IMAGE}':" Makefile.in || \
-#        die "sed python failed"
-#    fi
-#}
+net-snmp_src_prepare() {
+    if option python ; then
+        PYTHON_MODNAME="netsnmp"
+        PYTHON_DIR="/usr/lib/python2.7/site-packages"
+        sed -i -e "s:\(install --basedir=\$\$dir\):\1 --root='${IMAGE}':" Makefile.in || \
+        die "sed python failed"
+    fi
+}
 
 net-snmp_src_configure() {
 
@@ -90,13 +90,7 @@ net-snmp_src_configure() {
     fi
 
 
-
-    if option python ; then
-        --with-python-modules="netsnmp"
-    fi
-
-    econf \
-        --enable-silent-libtool
+    #econf \
 	--with-install-prefix="${IMAGE}" \
         --with-sys-location="Unknown" \
         --with-sys-contact="root@Unknown" \
