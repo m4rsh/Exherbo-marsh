@@ -97,7 +97,8 @@ src_configure() {
         --with-mib-modules="${mibs}" \
         --with-logfile="/var/log/net-snmpd.log" \
         --with-persistent-directory="/var/lib/net-snmp" \
-        --enable-ucd-snmp-compatibility \
+        --with-out-mib-modules="mibII"
+	--enable-ucd-snmp-compatibility \
         --enable-shared \
         --enable-as-needed \
         ${myconf}
