@@ -8,8 +8,7 @@ require systemd-service python
 SUMMARY="Simple Network Management Protocol (SNMP)"
 DESCRIPTION="Simple Network Management Protocol (SNMP) is a widely used protocol for monitoring the health and
 welfare of network equipment (eg. routers), computer equipment and even devices like UPSs. Net-SNMP
-is a suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using both IPv4 and IPv6.
-"
+is a suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using both IPv4 and IPv6."
 
 HOMEPAGE="http://www.net-snmp.org"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
@@ -63,8 +62,8 @@ src_install() {
     default
 
     keepdir /etc/snmp
-    einfo "To make your first configuration file, use 'snmpconf -g basic_setup' and copy snmpd.conf
-           where you want"
+    einfo "Use 'snmpconf -g basic_setup' if you need to create a newly 'snmpd.conf' and store it to 
+           the appropriate location."
     install_systemd_files
 }
 

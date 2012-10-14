@@ -1,4 +1,4 @@
-# Copyright 2011 Markus Schmits <RamsesV@gmx.net>
+# Copyright 2011-2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require perl-module [ module_author="JSTENZEL" ]
@@ -7,7 +7,4 @@ SUMMARY="interpolates script options from files into @ARGV or another array"
 
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
-
-DEPENDENCIES=""
 

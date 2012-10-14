@@ -1,28 +1,14 @@
-# Copyright 2010-2012 Markus Schmits <RamsesV@gmx.net>
+# Copyright 2010-2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="flvstreamer, an open source command-line RTMP client"
-DESCRIPTION="flvstreamer is an open source command-line RTMP client intended to stream audio or
-video content from all types of flash or rtmp servers. Forked from rtmpdump v1.6 with encrypted rtmp
-and swf verification support removed. This tool provides free interoperability with the previously
-undocumented adobe RTMP protocol so widely in use on the internet today. It was developed entirely
-by reverse engineering methods and without access to any proprietary or restrictive-license protocol
-specifications.
-"
+
 HOMEPAGE="http://savannah.nongnu.org/projects/flvstreamer/"
 DOWNLOADS="http://download.savannah.gnu.org/releases/${PN}/source/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS=""
-
-#DEPENDENCIES="
-#    build:
-#    build+run:
-#"
-
-BUGS_TO="RamsesV@gmx.net"
 
 WORK="${WORKBASE}/${PN}"
 
