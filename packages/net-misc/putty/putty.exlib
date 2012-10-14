@@ -1,4 +1,4 @@
-# Copyright 2012 Markus Schmits <RamsesV@gmx.net>
+# Copyright 2012 Markus Schmits <marsh.exherbo@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'putty-0.62.ebuild' from Gentoo, which is:
 #     Copyright 1999-2012 Gentoo Foundation.
@@ -7,14 +7,14 @@
 SUMMARY="UNIX port of the famous Telnet and SSH client"
 HOMEPAGE="http://www.chiark.greenend.org.uk/~sgtatham/${PN}/"
 DOWNLOADS="http://the.earth.li/~sgtatham/${PN}/latest/${PNV}.tar.gz"
-# BUGS_TO="RamsesV@gmx.net"
+
 LICENCES="MIT"
 SLOT="0"
 
-# MYOPTIONS="doc ipv6 kerberos"
+MYOPTIONS="doc ipv6 kerberos"
 
-      # kerberos? ( virtual/krb5 )
-      # x11-libs/gdk-pixbuf
+    kerberos? ( virtual/krb5 )
+    x11-libs/gdk-pixbuf
       
 DEPENDENCIES="
     build+run:
@@ -28,18 +28,18 @@ DEPENDENCIES="
         dev-util/pkg-config[>=0.20]
 "
 
-#putty_src_prepare() {
+#src_prepare() {
 #    default
 #}
 
-#putty_src_configure() {
+#src_configure() {
 #    default
 #}
 
-#putty_src_compile() {
+#src_compile() {
 #    default
 #}
 
-#putty_src_install() {
+#src_install() {
 #    default
 #}
